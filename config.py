@@ -5,7 +5,7 @@ load_dotenv()
 
 
 class Config:
-    SECRET_KEY = environ.get('SECRET_KEY')
+  SECRET_KEY = environ.get('SECRET_KEY')
 
 
 class ProdConfig(Config):
