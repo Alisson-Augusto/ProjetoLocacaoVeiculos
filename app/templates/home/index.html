@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block conteudo %}
+<h1>Tela Principal</h1>
+
+{% if current_user.is_authenticated %}
+<h2>Você esta logado!</h2>
+{%else%}
+<h2>Você é anônimo </h2>
+{% endif %}
+{% endblock %}

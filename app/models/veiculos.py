@@ -4,12 +4,12 @@ import sqlalchemy as sa
 class Veiculos(db.Model):
   __tablename__ = "veiculos"
   id     = sa.Column(sa.Integer, primary_key=True)
-  modelo = sa.Column(sa.String(128), nullable=False)
-  marca  = sa.Column(sa.String(128), nullable=False)
-  disponibilidade = sa.Column(sa.Boolean, nullable=False)
-  quantidade_ocupantes = sa.Column(sa.Integer, nullable=False)
-  capacidade_porta_malas = sa.Column(sa.Integer)
+  modelo = sa.Column(sa.String(50), nullable=False)
+  marca  = sa.Column(sa.String(50), nullable=False)
+  placa  = sa.Column(sa.String(8) , nullable=False, unique=True)
+  ocupantes = sa.Column(sa.Integer)
+  porta_malas = sa.Column(sa.Integer)
   freio_abs = sa.Column(sa.Boolean)
 
   def __repr__(self) -> str:
-    return f"Veículo - {self.modelo} da marca {self.marca} esta disponível? {self.disponibilidade}"
+    return f"Veículo[{self.placa}] - {self.modelo} da marca {self.marca}"

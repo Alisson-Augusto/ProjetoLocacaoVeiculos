@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block conteudo %}
+
+<div class="container-fluid h-100 d-flex align-items-center justify-content-center" style="max-width: fit-content;">
+
+  <div class="card p-3">
+    <h1>Cadastro</h1>
+    <form method="post">
+      {{ form.csrf_token }}
+      <div class="mb-3">
+        <label for="InputNome" class="form-label">Nome</label>
+        <input required type="text" class="form-control" id="InputNome" name="nome">
+      </div>
+      <div class="mb-3">
+        <label for="InputEmail" class="form-label">Email</label>
+        <input required type="email" class="form-control" id="InputEmail" name="email">
+      </div>
+      <div class="mb-3">
+        <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+        <input required type="date" class="form-control" id="data_nascimento" name="data_nascimento">
+      </div>
+      <div class="mb-3">
+        <label for="InputPassword" class="form-label">Senha</label>
+        <input required type="password" class="form-control" id="InputPassword" name="senha">
+      </div>
+
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-danger" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+  </div>
+
+</div>
+
+{% endblock %}

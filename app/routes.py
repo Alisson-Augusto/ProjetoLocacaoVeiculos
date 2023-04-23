@@ -4,7 +4,7 @@ rotas = Blueprint("rotas", __name__)
 
 @rotas.route("/")
 def home():
-  return render_template("index.html")
+  return render_template("home/index.html")
 
 
 @rotas.route("/admin")
