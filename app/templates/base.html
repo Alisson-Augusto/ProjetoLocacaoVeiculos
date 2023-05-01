@@ -4,14 +4,56 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LocaçãoDeCarros</title>
+  <title>CarangoCar</title>
 
   <link rel="stylesheet" href="{{url_for('static', filename='bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css')}}" />
   <script src="{{url_for('static', filename='bootstrap-5.3.0-alpha3-dist/js/bootstrap.bundle.min.js')}}"></script>
   <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}" />
 </head>
+<header>
+  <div class="content">
+    <nav>
+      <p class="brand">Carango<strong>Car</strong></p>
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link" href="/#frota">Conheça nossa frota</a></li>
+        {% if current_user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="/conta">Minha Conta</a></li>
+        {% endif %}
+        {% if not current_user.is_authenticated %}
+          <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+        {% endif %}
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </nav>
+    {% block header_block %}
+    {% endblock %}
+  </div>
+</header>
 <body style="height: 100vh;">
   {%block conteudo %}
   {% endblock %}
 </body>
+<footer>
+  <div class="main">
+    <div class="content footer-links">
+      <div class="footer-social">
+        <h4>Redes Sociais</h4>
+        <div class="social-icons">
+          <img src="{{url_for('static', filename='images/instagram.png')}}" alt="Instagram" />
+          <img src="{{url_for('static', filename='images/facebook.png')}}" alt="Facebook" />
+        </div>
+      </div>
+      <div class="footer-contact">
+        <h4>Contate-nos</h4>
+        <h6>+55 31 988776655</h6>
+        <h6>contato@contato.com</h6>
+        <h6>Avenida Monsenhor Tabosa, 1234 Meireles, Fortaleza CE</h6>
+      </div>
+    </div>
+  </div>
+  <div class="last">Grupo Unifor 2023.1</div>
+</footer>
 </html>

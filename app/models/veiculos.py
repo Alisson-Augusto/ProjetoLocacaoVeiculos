@@ -15,12 +15,22 @@ class Veiculos(db.Model):
   porta_malas = sa.Column(sa.Integer)
   freio_abs   = sa.Column(sa.Boolean)
 
+
   def get_imagem(self, placeholder = "images/car_placeholder.png") -> str:
     return self.imagem if self.imagem else placeholder 
   
+
   @staticmethod
   def get_frota():
-    return Veiculos.query.all()
+    resultado = []
+    modelos = []
+    frota = Veiculos.query.all()
+    for veiculo in frota:
+      if not veiculo.modelo in modelos:
+        resultado.append(veiculo)
+        modelos.append(veiculo.modelo)
+    return resultado
+  
 
   def __repr__(self) -> str:
     return f"Veículo[{self.placa}] - {self.modelo} da marca {self.marca}"

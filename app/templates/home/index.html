@@ -1,153 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projeto Programação Funcional</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}" />
-  </head>
-  <body>
-    <header>
-      <div class="content">
-        <nav>
-          <p class="brand">Carango<strong>Car</strong></p>
-          <ul>
-            <li><a href="#frota">Frota</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#features">Vantagens</a></li>
-            {% if not current_user.is_authenticated %}
-              <a href="/login"><button>Login</button></a>
-            {% endif %}
-          </ul>
-        </nav>
-        <div class="header-block">
-          <div class="text">
-            <h2>O carro perfeito para você</h2>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
-              asperiores?
-            </p>
-          </div>
-          <img src="{{url_for('static', filename='images/car-header.png')}}" alt="Car" />
-        </div>
-      </div>
-    </header>
-    <section class="frota" id="frota">
-      <div class="content">
-        <div class="title-wrapper-frota">
-          <p>Encontre o que deseja</p>
-          <h3>Nossa Frota</h3>
-        </div>
-        <div class="filter-card">
-          <input
-            type="text"
-            class="search-input"
-            placeholder="Escolha seu modelo favorito"
-          />
-          <button class="search-button">Buscar</button>
-        </div>
-        <div class="card-wrapper">
-          {% for veiculo in veiculos %}
-          <div class="card-item">
-            <img src="{{url_for('static', filename=veiculo.get_imagem())}}" alt="Car" />
-            <div class="card-content">
-              <h3>{{veiculo.modelo}}</h3>
-              <p>
-                {{veiculo.descricao}}
-              </p>
-              <button type="button" onclick="window.open('/alugar/veiculo/{{veiculo.modelo}}/', '_self');">Alugar - R${{veiculo.diaria}}/dia</button>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
+{% extends "base.html" %}
 
-    <section class="about" id="about">
-      <div class="content">
-        <div class="title-wrapper-about">
-          <h3>Sobre Nós</h3>
-        </div>
-        <div class="about-content">
-          <div class="left">
-            <img src="{{url_for('static', filename='images/about.png')}}" alt="About" />
-          </div>
-          <div class="right">
-            <h3>Lorem ipsum dolor sit</h3>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Repudiandae ut inventore magni repellendus ab ad itaque facere. A
-              tenetur quam, nobis tempore illum laborum ipsa fuga, itaque
-              possimus repellat ad perspiciatis, velit reiciendis eos facilis
-              sapiente blanditiis quas officia hic beatae quibusdam! Quod
-              eligendi porro possimus voluptatum ad ipsum sapiente soluta,
-              maiores nobis tenetur adipisci officiis nisi illum quae natus
-              nostrum tempora accusantium blanditiis? Rem nesciunt illum
-              dolorum, perferendis quos consequatur suscipit cumque fugiat alias
-              sint repellat qui adipisci error est distinctio doloribus labore
-              sunt modi eos odio quibusdam dicta. Dignissimos voluptate illum
-              possimus quo. Ducimus repellat doloribus quisquam quidem?
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
+{% block header_block %}
+<div class="header-block">
+  <div class="text">
+    <h2>O carro perfeito para você</h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia,
+      asperiores?
+    </p>
+  </div>
+  <img src="{{url_for('static', filename='images/car-header.png')}}" alt="Car" />
+</div>
+{% endblock %}
+{% block conteudo %}
+<section class="frota" id="frota">
+  <div class="content">
+    <div class="title-wrapper-frota">
+      <p>Encontre o que deseja</p>
+      <h3>Nossa Frota</h3>
+    </div>
+    <div class="filter-card">
+      <input
+        type="text"
+        class="form-control"
+        list="modelos-carros"
+        placeholder="Escolha seu modelo favorito"
+      />
+      <button class="btn btn-primary">Buscar</button>
 
-    <section class="features" id="features">
-      <div class="content">
-        <div class="title-wrapper-features">
-          <h3>Vantagens</h3>
-        </div>
-        <div class="feature-card-block">
-          <div class="feature-card-item">
-            <img src="{{url_for('static', filename='images/feature-planet.png')}}" alt="Feature" />
-            <div class="feature-text-content">
-              <h3>Title</h3>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-            </div>
-          </div>
-          <div class="feature-card-item">
-            <img src="{{url_for('static', filename='images/feature-planet.png')}}" alt="Feature" />
-            <div class="feature-text-content">
-              <h3>Title</h3>
-              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-            </div>
-          </div>
+      <datalist id="modelos-carros">
+        {% for veiculo in veiculos %}
+          <option value="{{veiculo.modelo}}">
+        {% endfor %}
+      </datalist>
+    </div>
+    <div class="card-wrapper">
+      {% for veiculo in veiculos %}
+      <div class="card-item">
+        <img src="{{url_for('static', filename=veiculo.get_imagem())}}" alt="Car" />
+        <div class="card-content">
+          <h3>{{veiculo.modelo}}</h3>
+          <p>
+            {{veiculo.descricao}}
+          </p>
+          <button type="button" onclick="window.open('/alugar/veiculo/{{veiculo.modelo}}/', '_self');">Alugar - R${{veiculo.diaria}}/dia</button>
         </div>
       </div>
-    </section>
-
-    <footer>
-      <div class="main">
-        <div class="content footer-links">
-          <div class="footer-company">
-            <h4>Company</h4>
-            <h6>About</h6>
-            <h6>Contact</h6>
-          </div>
-          <div class="footer-rental">
-            <h4>Rental</h4>
-            <h6>Self-Drive</h6>
-            <h6>Chauffer-Driven</h6>
-            <h6>Help</h6>
-          </div>
-          <div class="footer-social">
-            <h4>Stay connected</h4>
-            <div class="social-icons">
-              <img src="{{url_for('static', filename='images/instagram.png')}}" alt="Instagram" />
-              <img src="{{url_for('static', filename='images/facebook.png')}}" alt="Facebook" />
-            </div>
-          </div>
-          <div class="footer-contact">
-            <h4>Contact US</h4>
-            <h6>+55 31 988776655</h6>
-            <h6>contato@contato.com</h6>
-            <h6>Nome da Rua, Fortaleza CE</h6>
-          </div>
-        </div>
-      </div>
-      <div class="last">Grupo Unifor 2023.1</div>
-    </footer>
-  </body>
-</html>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}
