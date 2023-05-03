@@ -115,7 +115,7 @@ nav ul button:hover {
 
 .header-block .text {
   position: absolute;
-  bottom: 30%;
+  top: 35%;
   left: 15%;
 }
 
@@ -212,6 +212,8 @@ section .card-item {
 }
 
 .card-item img {
+  object-fit: contain;
+  max-height: 160px;
   width: 85%;
 }
 
