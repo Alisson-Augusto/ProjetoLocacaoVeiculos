@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div class="container">
+  <h1>Realizar Reserva</h1>
+  <form action="">
+    <div class="row">
+      <div class="col mb-3">
+        <label for="selecao-agencia-retirada" class="form-label">Agência de Retirada</label>
+        <select class="form-select" name="selecao-agencia-retirada" disabled>
+          <option selected value="{{agencia_selecionada.id}}">{{agencia_selecionada.localizacao}}</option>
+        </select>
+      </div>
+      <div class="col mb-3">
+        <label for="data_retirada" class="form-label">Data de Retirada</label>
+        <input required type="date" class="form-control" id="data_nascimento" name="data_retirada" value="{{data_atual}}">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col mb-3">
+        <label for="selecao-agencia-devolucao" class="form-label">Agência de Devolução</label>
+        <select class="form-select" name="selecao-agencia-devolucao">
+          <option selected value="{{agencia_selecionada.id}}">{{agencia_selecionada.localizacao}}</option>
+          {% for agencia in agencias %}
+            {% if agencia.id != agencia_selecionada.id%}
+              <option selected value="{{agencia.id}}">{{agencia.localizacao}}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <div class="col mb-3">
+        <label for="data_retirada" class="form-label">Data de Devolução</label>
+        <input required type="date" class="form-control" id="data_nascimento" name="data_retirada">
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Continuar</button>
+  </form>
+</div>
+{% endblock %}

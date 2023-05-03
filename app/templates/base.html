@@ -13,7 +13,7 @@
 <header>
   <div class="content">
     <nav>
-      <p class="brand">Carango<strong>Car</strong></p>
+      <a href="/" class="nav-link"><p class="brand">Carango<strong>Car</strong></p></a>
       <ul class="nav">
         <li class="nav-item"><a class="nav-link" href="/#frota">Conheça nossa frota</a></li>
         {% if current_user.is_authenticated %}
@@ -24,8 +24,10 @@
         {% endif %}
       </ul>
       <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-primary" type="submit">Search</button>
+        <div class="dropdown">
+          <input id="buscar-agencia" class="form-control" type="search" placeholder="Pesquisar Agência" aria-label="Search" style="min-width: 400px;">
+          <ul class="dropdown-menu w-100" aria-labelledby="buscar-agencia" id="dropdown-sugestoes-agencias"></ul>
+        </div>
       </form>
     </nav>
     {% block header_block %}
@@ -33,7 +35,7 @@
   </div>
 </header>
 <body style="height: 100vh;">
-  {%block conteudo %}
+  {% block conteudo %}
   {% endblock %}
 </body>
 <footer>
@@ -56,4 +58,6 @@
   </div>
   <div class="last">Grupo Unifor 2023.1</div>
 </footer>
+
+<script src="{{url_for('static', filename='js/buscar_agencia.js')}}"></script>
 </html>
