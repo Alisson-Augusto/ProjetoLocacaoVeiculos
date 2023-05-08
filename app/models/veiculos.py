@@ -14,6 +14,7 @@ class Veiculos(db.Model):
   ocupantes   = sa.Column(sa.Integer)
   porta_malas = sa.Column(sa.Integer)
   freio_abs   = sa.Column(sa.Boolean)
+  disponibilidade = sa.Column(sa.Boolean, default=True)
 
 
   def get_imagem(self, placeholder = "images/car_placeholder.png") -> str:
@@ -21,16 +22,30 @@ class Veiculos(db.Model):
   
 
   @staticmethod
-  def get_frota():
+  def __filtra_por_modelos(veiculos):
     resultado = []
     modelos = []
-    frota = Veiculos.query.all()
-    for veiculo in frota:
+    for veiculo in veiculos:
       if not veiculo.modelo in modelos:
         resultado.append(veiculo)
         modelos.append(veiculo.modelo)
     return resultado
+
+
+  @staticmethod
+  def get_frota():
+    return Veiculos.__filtra_por_modelos(Veiculos.query.all())
   
 
+  @staticmethod
+  def get_from_agencia(id):
+    veiculos = Veiculos.query.filter(Veiculos.agencia==id, Veiculos.disponibilidade==True).all()
+    return Veiculos.__filtra_por_modelos(veiculos)
+  
+
+  def get_nome(self) -> str:
+    return f"{self.marca} - {self.modelo}"
+  
+  
   def __repr__(self) -> str:
     return f"Veículo[{self.placa}] - {self.modelo} da marca {self.marca}"
