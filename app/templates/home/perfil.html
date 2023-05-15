@@ -1,5 +1,24 @@
 {% extends "base.html" %}
 {% block conteudo %}
-<h1>Perfil!</h1>
-<p>Ainda deve ser implementado...</p>
+<h2 class="h2 m-3">Minhas Reservas</h2>
+{% for recibo in recibos %}
+  {% set card_class = "text-bg-success" if recibo.status_devolucao else "text-bg-danger" %}
+  {% set veiculo = recibo.get_veiculo() %}
+  <div class="card {{ card_class }} mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ url_for('static', filename=veiculo.get_imagem())}}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ veiculo.get_nome() }}</h5>
+          <p class="card-text"><small>Data de Retirada: 20/04/2023</small></p>
+          <p class="card-text"><small>Data de Devolução: 20/05/2023</small></p>
+          <p class="card-text"><small>Status: <strong>{{"Entregue" if recibo.status_devolucao else "Não entregue"}}</strong></small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
 {% endblock %}

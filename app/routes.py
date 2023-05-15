@@ -16,9 +16,11 @@ def home():
   return render_template("home/index.html", veiculos=veiculos)
 
 
-@rotas.route("/perfil")
+@rotas.route("/conta")
+@login_required
 def perfil():
-  return render_template("home/perfil.html")
+  recibos = current_user.get_historico_locacoes()
+  return render_template("home/perfil.html", recibos=recibos)
 
 
 @rotas.route("/agencias/<id>", methods=["GET", "POST"])

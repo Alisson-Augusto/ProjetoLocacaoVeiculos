@@ -3,6 +3,8 @@ import sqlalchemy as sa
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
+from app.models.recibo import Recibo
+
 class Usuario(UserMixin, db.Model):
   __tablename__ = "usuarios"
   id   = sa.Column(sa.Integer, primary_key=True)
@@ -17,6 +19,9 @@ class Usuario(UserMixin, db.Model):
 
   def verificar_senha(self, senha: str) -> bool:
     return check_password_hash(self.senha, senha)
+  
+  def get_historico_locacoes(self):
+    return Recibo.query.filter(Recibo.usuario==self.id).all()
 
   def __repr__(self) -> str:
     return f"{self.nome} -> {self.email} -> {self.id} -> DATA({self.data_nascimento})"
