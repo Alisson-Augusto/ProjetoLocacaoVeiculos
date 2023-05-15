@@ -2,7 +2,6 @@ from app import db
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
 
-from app.models.veiculos import Veiculos
 from app.models.funcionario import Funcionario
 
 

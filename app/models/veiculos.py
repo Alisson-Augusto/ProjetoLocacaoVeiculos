@@ -1,5 +1,7 @@
 from app import db
 import sqlalchemy as sa
+from app.models.agencia import Agencia
+
 
 class Veiculos(db.Model):
   __tablename__ = "veiculos"
@@ -20,6 +22,11 @@ class Veiculos(db.Model):
   def get_imagem(self, placeholder = "images/car_placeholder.png") -> str:
     return self.imagem if self.imagem else placeholder 
   
+
+  def get_agencias_com_modelo(modelo):
+    modelos_veiculo = Veiculos.query.filter(Veiculos.modelo==modelo, Veiculos.disponibilidade==True).all()
+    return [Agencia.query.get(veiculo.agencia) for veiculo in modelos_veiculo]
+
 
   @staticmethod
   def __filtra_por_modelos(veiculos):

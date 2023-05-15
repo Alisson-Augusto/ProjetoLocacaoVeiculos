@@ -23,7 +23,16 @@
           <p>
             {{veiculo.descricao}}
           </p>
-          <button type="button" onclick="window.open('/alugar/veiculo/{{veiculo.modelo}}/', '_self');">Alugar - R${{veiculo.diaria}}/dia</button>
+
+          {% if veiculo.disponibilidade %}
+            <button class="btn btn-primary" type="button" onclick="window.open('/agencias/veiculo/{{veiculo.modelo}}', '_self');">
+              Alugar - R${{veiculo.diaria}}/dia
+            </button>
+            {% else %}
+            <button class="btn btn-primary" disabled type="button" onclick="window.open('/agencias/veiculo/{{veiculo.modelo}}', '_self');">
+              Indisponível
+            </button>
+          {% endif %}
         </div>
       </div>
       {% endfor %}
