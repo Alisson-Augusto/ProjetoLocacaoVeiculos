@@ -21,7 +21,7 @@ class Usuario(UserMixin, db.Model):
     return check_password_hash(self.senha, senha)
   
   def get_historico_locacoes(self):
-    return Recibo.query.filter(Recibo.usuario==self.id).all()
+    return Recibo.query.filter(Recibo.usuario==self.id).order_by(Recibo.data_retirada.desc()).all()
 
   def __repr__(self) -> str:
     return f"{self.nome} -> {self.email} -> {self.id} -> DATA({self.data_nascimento})"

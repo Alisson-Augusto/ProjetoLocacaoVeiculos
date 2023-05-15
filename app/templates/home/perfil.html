@@ -12,8 +12,8 @@
       <div class="col-md-8">
         <div class="card-body">
           <h5 class="card-title">{{ veiculo.get_nome() }}</h5>
-          <p class="card-text"><small>Data de Retirada: 20/04/2023</small></p>
-          <p class="card-text"><small>Data de Devolução: 20/05/2023</small></p>
+          <p class="card-text"><small>Data de Retirada: {{ recibo.get_data_retirada() }}</small></p>
+          <p class="card-text"><small>Data de Devolução: {{ recibo.get_data_devolucao() }}</small></p>
           <p class="card-text"><small>Status: <strong>{{"Entregue" if recibo.status_devolucao else "Não entregue"}}</strong></small></p>
         </div>
       </div>
