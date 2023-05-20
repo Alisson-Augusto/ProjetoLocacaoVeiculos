@@ -1,3 +1,4 @@
+import logging
 from flask import Blueprint, flash, redirect, render_template
 from flask_login import login_required, login_user, logout_user
 
@@ -24,8 +25,11 @@ def login():
         if usuario and usuario.verificar_senha(form.senha.data):
             login_user(usuario)
             return redirect("/")
+        
+        logging.error("Email ou senha incorreto")
         flash("Email ou senha incorreto")
-
+    
+    logging.error(form.errors)
     return render_template("auth/login.html", form=form)
 
 
@@ -48,7 +52,11 @@ def cadastro():
             login_user(user)
             return redirect("/")
         
+        logging.error("Este usuário já foi cadastrado")
         flash("Este usuário já foi cadastrado")
+
+
+    logging.error(form.errors)
     return render_template("auth/cadastro.html", form=form)
 
 

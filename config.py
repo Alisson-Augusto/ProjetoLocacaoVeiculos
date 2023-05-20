@@ -20,3 +20,12 @@ class DevConfig(Config):
   DEBUG     = True
   TESTING   = True
   SQLALCHEMY_DATABASE_URI = environ.get('DEV_DATABASE_URI')
+
+
+class TestConfig(Config):
+  FLASK_ENV = "test"
+  DEBUG     = True
+  TESTING   = True
+  SQLALCHEMY_DATABASE_URI = environ.get('TEST_DATABASE_URI')
+  WTF_CSRF_ENABLED = False
+
