@@ -1,3 +1,4 @@
+import logging
 from flask import Blueprint, flash, redirect, render_template, request
 from flask_login import current_user, login_required
 from app.forms.reserva import ReservaForm
@@ -32,14 +33,11 @@ def agencias_veiculo(modelo):
   if len(agencias_retirada) == 0:
     flash("Este veículo não esta mais disponível")
     return redirect("/")
-  
-  '''
-  TODO - Lista de veículos deve ser atualizada
-  Quando usuário troca de agência de retirada
-  '''
-  veiculos = Veiculos.get_from_agencia(agencias_retirada[0].id)
+
+  agencias_retirada = agencias_retirada[0]
+  veiculos = Veiculos.get_from_agencia(agencias_retirada.id)
   agencias = Agencia.query.all()
-  form.ag_retirada.choices = [(agencia.id, agencia.localizacao) for agencia in agencias_retirada]
+  form.ag_retirada.choices = [(agencias_retirada.id, agencias_retirada.localizacao)]
   form.ag_devolucao.choices = [(agencia.id, agencia.localizacao) for agencia in agencias]
   form.veiculo.choices = [(veiculo.id, veiculo.get_nome()) for veiculo in veiculos]
 
@@ -93,7 +91,7 @@ def agencias(id):
     db.session.commit()
     return redirect("/")
 
-
+  logging.error(form.errors)
   return render_template("agencia/agencia.html",
               form=form,
               data_atual=date.today())

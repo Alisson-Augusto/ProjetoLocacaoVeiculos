@@ -28,4 +28,5 @@ class TestConfig(Config):
   TESTING   = True
   SQLALCHEMY_DATABASE_URI = environ.get('TEST_DATABASE_URI')
   WTF_CSRF_ENABLED = False
+  LOGIN_DISABLED = True
 
