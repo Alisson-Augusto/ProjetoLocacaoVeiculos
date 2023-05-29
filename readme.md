@@ -1,5 +1,32 @@
 # Documentação
 
+# Equipe:
+* Alisson Augusto
+* Guilherme Saraiva
+* Paulo Nelson
+* Vitor Ipiranga
+
+# Requisitos
+## Requisitos Funcionais
+RF001: O sistema deve permitir que os usuários criem uma conta e façam login.
+RF002: O sistema deve mostrar os modelos de veículos disponíveis nas agências selecionadas no momento da reserva.
+RF003: O sistema deve permitir que os usuários reservem um veículo selecionado, fornecendo informações de local de retirada e devolução.
+RF004: O sistema deve gerar um recibo eletrônico da reserva e armazená-lo na base de dados.
+RF005: O sistema deve permitir aos usuários visualizar toda a frota de modelos de carros disponíveis.
+RF006: O sistema deve permitir aos usuários logados visualizar seu histórico de reservas.
+RF007: O sistema deve permitir aos usuários pesquisarem por agências.
+
+## Requisitos não funcionais
+RNF001: O sistema deve ser compatível com os principais navegadores da web (Chrome, Firefox, Safari e Edge).
+RNF002: O tempo de resposta do sistema não deve exceder 2 segundos para qualquer solicitação.
+RNF003: O sistema deve seguir padrões de segurança para proteger informações sensíveis dos clientes, como criptografia para dados sensíveis.
+RNF004: O sistema deve ser capaz de gerenciar seu próprio inventário e reservas.
+RNF005: O sistema deve ser escalável para acomodar um aumento na demanda durante períodos de pico.
+
+# Modelo de Entidade e Relacionamento (MER)
+![Diagrama de Entidade Relacionamento](MER.png)
+
+# Relatório
 ## Requisito 1: O sistema deve permitir que os usuários criem uma conta e façam login.
 
 ## Implementação do Requisito:
