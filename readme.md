@@ -112,7 +112,7 @@ def test_cadastro_e_login_usuario(client):
   assert response.status_code == 302
 ```
 
-## Reserva de veículos, requisitos: 2, 3, 4 e 6
+## Reserva de veículos, requisitos: 2, 3, 4, 5 e 6
 
 ## Implementação do Requisito:
 As definições para esse requisito são implementadas nas rotas `/agencias/<id>` e `/agencias/veiculo/<modelo>` no arquivo `app/routes.py`, que permitem os usuários realizar a reserva dos veículos, por meio de um formulário. Tanto selecionando por uma agência especifica quanto buscando por um modelo de veículo.
